@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bdsenaitdsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="PROFID" />
+          </Key>
+          <Property Name="PROFID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROFNOME" Type="varchar" MaxLength="100" />
+          <Property Name="TURID" Type="int" />
+        </EntityType>
+        <EntityType Name="Turno">
+          <Key>
+            <PropertyRef Name="TURID" />
+          </Key>
+          <Property Name="TURID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TURDESCRICAO" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Professor__TURID__2B3F6F97">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="0..1" />
+          <End Role="Professor" Type="Self.Professor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="TURID" />
+            </Principal>
+            <Dependent Role="Professor">
+              <PropertyRef Name="TURID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdsenaitdsModelStoreContainer">
+          <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Professor__TURID__2B3F6F97" Association="Self.FK__Professor__TURID__2B3F6F97">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="Professor" EntitySet="Professor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdsenaitdsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="bdsenaitdsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Professor" EntityType="bdsenaitdsModel.Professor" />
+          <EntitySet Name="Turno" EntityType="bdsenaitdsModel.Turno" />
+          <AssociationSet Name="FK__Professor__TURID__2B3F6F97" Association="bdsenaitdsModel.FK__Professor__TURID__2B3F6F97">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="Professor" EntitySet="Professor" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="PROFID" />
+          </Key>
+          <Property Name="PROFID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROFNOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TURID" Type="Int32" />
+          <NavigationProperty Name="Turno" Relationship="bdsenaitdsModel.FK__Professor__TURID__2B3F6F97" FromRole="Professor" ToRole="Turno" />
+        </EntityType>
+        <EntityType Name="Turno">
+          <Key>
+            <PropertyRef Name="TURID" />
+          </Key>
+          <Property Name="TURID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TURDESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Professor" Relationship="bdsenaitdsModel.FK__Professor__TURID__2B3F6F97" FromRole="Turno" ToRole="Professor" />
+        </EntityType>
+        <Association Name="FK__Professor__TURID__2B3F6F97">
+          <End Type="bdsenaitdsModel.Turno" Role="Turno" Multiplicity="0..1" />
+          <End Type="bdsenaitdsModel.Professor" Role="Professor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="TURID" />
+            </Principal>
+            <Dependent Role="Professor">
+              <PropertyRef Name="TURID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdsenaitdsModelStoreContainer" CdmEntityContainer="bdsenaitdsEntities">
+          <EntitySetMapping Name="Professor">
+            <EntityTypeMapping TypeName="bdsenaitdsModel.Professor">
+              <MappingFragment StoreEntitySet="Professor">
+                <ScalarProperty Name="TURID" ColumnName="TURID" />
+                <ScalarProperty Name="PROFNOME" ColumnName="PROFNOME" />
+                <ScalarProperty Name="PROFID" ColumnName="PROFID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turno">
+            <EntityTypeMapping TypeName="bdsenaitdsModel.Turno">
+              <MappingFragment StoreEntitySet="Turno">
+                <ScalarProperty Name="TURDESCRICAO" ColumnName="TURDESCRICAO" />
+                <ScalarProperty Name="TURID" ColumnName="TURID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

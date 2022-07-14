@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bdsenaitdsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Professor">
+    <Key>
+      <PropertyRef Name="PROFID" />
+    </Key>
+    <Property Name="PROFID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PROFNOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TURID" Type="Int32" />
+    <NavigationProperty Name="Turno" Relationship="Self.FK__Professor__TURID__2B3F6F97" FromRole="Professor" ToRole="Turno" />
+  </EntityType>
+  <EntityType Name="Turno">
+    <Key>
+      <PropertyRef Name="TURID" />
+    </Key>
+    <Property Name="TURID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TURDESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Professor" Relationship="Self.FK__Professor__TURID__2B3F6F97" FromRole="Turno" ToRole="Professor" />
+  </EntityType>
+  <Association Name="FK__Professor__TURID__2B3F6F97">
+    <End Role="Turno" Type="Self.Turno" Multiplicity="0..1" />
+    <End Role="Professor" Type="Self.Professor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Turno">
+        <PropertyRef Name="TURID" />
+      </Principal>
+      <Dependent Role="Professor">
+        <PropertyRef Name="TURID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bdsenaitdsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Professor" EntityType="Self.Professor" />
+    <EntitySet Name="Turno" EntityType="Self.Turno" />
+    <AssociationSet Name="FK__Professor__TURID__2B3F6F97" Association="Self.FK__Professor__TURID__2B3F6F97">
+      <End Role="Turno" EntitySet="Turno" />
+      <End Role="Professor" EntitySet="Professor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

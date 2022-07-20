@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bdTeslaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="MODELID" />
+          </Key>
+          <Property Name="MODELID" Type="int" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="100" />
+          <Property Name="ANO" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Veiculo">
+          <Key>
+            <PropertyRef Name="VEID" />
+          </Key>
+          <Property Name="VEID" Type="int" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="100" />
+          <Property Name="VALOR" Type="int" />
+          <Property Name="MODELID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Veiculo__MODELID__29572725">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="0..1" />
+          <End Role="Veiculo" Type="Self.Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="MODELID" />
+            </Principal>
+            <Dependent Role="Veiculo">
+              <PropertyRef Name="MODELID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdTeslaModelStoreContainer">
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Veiculo" EntityType="Self.Veiculo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Veiculo__MODELID__29572725" Association="Self.FK__Veiculo__MODELID__29572725">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Veiculo" EntitySet="Veiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdTeslaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="MODELID" />
+          </Key>
+          <Property Name="MODELID" Type="Int32" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ANO" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Veiculo" Relationship="Self.FK__Veiculo__MODELID__29572725" FromRole="Modelo" ToRole="Veiculo" />
+        </EntityType>
+        <EntityType Name="Veiculo">
+          <Key>
+            <PropertyRef Name="VEID" />
+          </Key>
+          <Property Name="VEID" Type="Int32" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VALOR" Type="Int32" />
+          <Property Name="MODELID" Type="Int32" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK__Veiculo__MODELID__29572725" FromRole="Veiculo" ToRole="Modelo" />
+        </EntityType>
+        <Association Name="FK__Veiculo__MODELID__29572725">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="0..1" />
+          <End Role="Veiculo" Type="Self.Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="MODELID" />
+            </Principal>
+            <Dependent Role="Veiculo">
+              <PropertyRef Name="MODELID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdTeslaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" />
+          <EntitySet Name="Veiculo" EntityType="Self.Veiculo" />
+          <AssociationSet Name="FK__Veiculo__MODELID__29572725" Association="Self.FK__Veiculo__MODELID__29572725">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Veiculo" EntitySet="Veiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdTeslaModelStoreContainer" CdmEntityContainer="bdTeslaEntities">
+          <EntitySetMapping Name="Modelo">
+            <EntityTypeMapping TypeName="bdTeslaModel.Modelo">
+              <MappingFragment StoreEntitySet="Modelo">
+                <ScalarProperty Name="MODELID" ColumnName="MODELID" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ANO" ColumnName="ANO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Veiculo">
+            <EntityTypeMapping TypeName="bdTeslaModel.Veiculo">
+              <MappingFragment StoreEntitySet="Veiculo">
+                <ScalarProperty Name="VEID" ColumnName="VEID" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="MODELID" ColumnName="MODELID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

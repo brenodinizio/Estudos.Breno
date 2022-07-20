@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bdTeslaModelStoreContainer" CdmEntityContainer="bdTeslaEntities">
+    <EntitySetMapping Name="Modelo">
+      <EntityTypeMapping TypeName="bdTeslaModel.Modelo">
+        <MappingFragment StoreEntitySet="Modelo">
+          <ScalarProperty Name="MODELID" ColumnName="MODELID" />
+          <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+          <ScalarProperty Name="ANO" ColumnName="ANO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Veiculo">
+      <EntityTypeMapping TypeName="bdTeslaModel.Veiculo">
+        <MappingFragment StoreEntitySet="Veiculo">
+          <ScalarProperty Name="VEID" ColumnName="VEID" />
+          <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+          <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+          <ScalarProperty Name="MODELID" ColumnName="MODELID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bdTeslaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Modelo">
+    <Key>
+      <PropertyRef Name="MODELID" />
+    </Key>
+    <Property Name="MODELID" Type="Int32" Nullable="false" />
+    <Property Name="DESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ANO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Veiculo" Relationship="Self.FK__Veiculo__MODELID__29572725" FromRole="Modelo" ToRole="Veiculo" />
+  </EntityType>
+  <EntityType Name="Veiculo">
+    <Key>
+      <PropertyRef Name="VEID" />
+    </Key>
+    <Property Name="VEID" Type="Int32" Nullable="false" />
+    <Property Name="DESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VALOR" Type="Int32" />
+    <Property Name="MODELID" Type="Int32" />
+    <NavigationProperty Name="Modelo" Relationship="Self.FK__Veiculo__MODELID__29572725" FromRole="Veiculo" ToRole="Modelo" />
+  </EntityType>
+  <Association Name="FK__Veiculo__MODELID__29572725">
+    <End Role="Modelo" Type="Self.Modelo" Multiplicity="0..1" />
+    <End Role="Veiculo" Type="Self.Veiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modelo">
+        <PropertyRef Name="MODELID" />
+      </Principal>
+      <Dependent Role="Veiculo">
+        <PropertyRef Name="MODELID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bdTeslaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Modelo" EntityType="Self.Modelo" />
+    <EntitySet Name="Veiculo" EntityType="Self.Veiculo" />
+    <AssociationSet Name="FK__Veiculo__MODELID__29572725" Association="Self.FK__Veiculo__MODELID__29572725">
+      <End Role="Modelo" EntitySet="Modelo" />
+      <End Role="Veiculo" EntitySet="Veiculo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
